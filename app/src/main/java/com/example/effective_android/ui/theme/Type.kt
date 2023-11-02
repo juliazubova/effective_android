@@ -34,6 +34,18 @@ val Typography = Typography(
         fontWeight = FontWeight(700),
         letterSpacing = 0.6.sp,
     ),
+    titleSmall = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.sk_modernist_regular)),
+        fontWeight = FontWeight(400),
+        letterSpacing = 0.5.sp,
+    ),
+    bodyLarge = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = FontFamily(Font(R.font.sk_modernist_regular)),
+        fontWeight = FontWeight(400),
+        letterSpacing = 0.5.sp
+    ),
     bodyMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.sk_modernist_regular)),
         fontWeight = FontWeight(400),

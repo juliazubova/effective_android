@@ -14,12 +14,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,13 +48,21 @@ class MainActivity : ComponentActivity() {
                     HeaderImage()
                     Card(
                         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                        modifier = Modifier.padding(start = 24.dp).fillMaxWidth()
+                        modifier = Modifier
+                            .padding(start = 24.dp)
+                            .fillMaxWidth()
                     ) {
                         HeaderWithLogo(getString(R.string.game_name), getString(R.string.number_of_reviews))
-                        Spacer(modifier = Modifier.height(16.dp))
                         TagsAndDescrition(res.getStringArray(R.array.tags), getString(R.string.game_description))
                         Carousel()
                         RatingAndReviews(getString(R.string.game_rating), getString(R.string.number_of_reviews))
+                        Comment(R.drawable.person1, getString(R.string.commentator1), getString(R.string.date1), getString(R.string.comment1))
+                        Divider(
+                            color = MaterialTheme.colorScheme.onSecondary,
+                            thickness = 1.dp,
+                            modifier = Modifier.padding(bottom = 24.dp)
+                        )
+                        Comment(R.drawable.person2, getString(R.string.commentator2), getString(R.string.date2), getString(R.string.comment2))
                     }
                 }
 
@@ -67,7 +77,7 @@ fun HeaderImage(){
         painter = painterResource(id = R.drawable.header),
         contentDescription = "image",
         contentScale = ContentScale.FillWidth,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth()
     )
 }
 
@@ -173,9 +183,13 @@ fun RatingAndReviews(game_rating: String, number_of_reviews: String){
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(end = 12.dp)
     )
-    Row (verticalAlignment = Alignment.Bottom){
+    Row (
+        verticalAlignment = Alignment.Bottom,
+        modifier = Modifier.padding(bottom = 30.dp)
+    ){
         Text(
             text = game_rating,
+            color = MaterialTheme.colorScheme.secondary,
             style = MaterialTheme.typography.titleLarge
         )
         Column (modifier = Modifier.padding(start = 17.dp)){
@@ -186,9 +200,41 @@ fun RatingAndReviews(game_rating: String, number_of_reviews: String){
             )
             Text(
                 text = number_of_reviews + " Reviews",
+                color = MaterialTheme.colorScheme.onSecondary,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 7.dp)
             )
         }
     }
+}
+
+@Composable
+fun Comment(image: Int, user_name: String, date: String, comment: String) {
+    Row() {
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = "person1",
+            modifier = Modifier.size(36.dp).padding(end = 16.dp)
+        )
+        Column {
+            Text(
+                text = user_name,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.padding(bottom = 7.dp)
+            )
+            Text(
+                text = date,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSecondary,
+                modifier = Modifier.padding(bottom = 7.dp)
+            )
+        }
+    }
+    Text(
+        text = comment,
+        style = MaterialTheme.typography.headlineSmall,
+        color = MaterialTheme.colorScheme.onPrimary,
+        modifier = Modifier.padding(bottom = 24.dp, end = 24.dp)
+    )
 }
