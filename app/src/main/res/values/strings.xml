@@ -2,6 +2,7 @@
     <string name="app_name">effective_android</string>
 
     <string name="game_name">DoTA 2</string>
+    <string name="game_rating">4.9</string>
     <string name='number_of_reviews'>70M</string>
 
     <string-array name="tags">

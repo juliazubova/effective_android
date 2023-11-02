@@ -2,15 +2,11 @@ package com.example.effective_android
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.provider.Settings
-import android.provider.Settings.Global.getString
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,8 +18,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -32,10 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.effective_android.ui.theme.Effective_androidTheme
@@ -60,6 +52,7 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(16.dp))
                         TagsAndDescrition(res.getStringArray(R.array.tags), getString(R.string.game_description))
                         Carousel()
+                        RatingAndReviews(getString(R.string.game_rating), getString(R.string.number_of_reviews))
                     }
                 }
 
@@ -170,4 +163,32 @@ fun ImageInCarousel(path: Int){
             .padding(end = 13.dp)
             .clip(RoundedCornerShape(16.dp))
     )
+}
+
+@Composable
+fun RatingAndReviews(game_rating: String, number_of_reviews: String){
+    Text(
+        text = "Reviews & Ratings",
+        color = MaterialTheme.colorScheme.onPrimary,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(end = 12.dp)
+    )
+    Row (verticalAlignment = Alignment.Bottom){
+        Text(
+            text = game_rating,
+            style = MaterialTheme.typography.titleLarge
+        )
+        Column (modifier = Modifier.padding(start = 17.dp)){
+            Image(
+                painter = painterResource(id = R.drawable.stars),
+                contentDescription = "image",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            Text(
+                text = number_of_reviews + " Reviews",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(bottom = 7.dp)
+            )
+        }
+    }
 }
