@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -63,6 +66,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(bottom = 24.dp)
                         )
                         Comment(R.drawable.person2, getString(R.string.commentator2), getString(R.string.date2), getString(R.string.comment2))
+                        InstallButton()
                     }
                 }
 
@@ -77,7 +81,9 @@ fun HeaderImage(){
         painter = painterResource(id = R.drawable.header),
         contentDescription = "image",
         contentScale = ContentScale.FillWidth,
-        modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(bottom = 16.dp)
+            .fillMaxWidth()
     )
 }
 
@@ -214,7 +220,9 @@ fun Comment(image: Int, user_name: String, date: String, comment: String) {
         Image(
             painter = painterResource(id = image),
             contentDescription = "person1",
-            modifier = Modifier.size(36.dp).padding(end = 16.dp)
+            modifier = Modifier
+                .size(36.dp)
+                .padding(end = 16.dp)
         )
         Column {
             Text(
@@ -237,4 +245,30 @@ fun Comment(image: Int, user_name: String, date: String, comment: String) {
         color = MaterialTheme.colorScheme.onPrimary,
         modifier = Modifier.padding(bottom = 24.dp, end = 24.dp)
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun InstallButton() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp, bottom = 40.dp, end = 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Button(
+            onClick = {},
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.tertiary),
+            modifier = Modifier
+                .width(327.dp)
+                .height(64.dp),
+            shape = RoundedCornerShape(size = 12.dp)
+        ) {
+            Text(
+                text = "Install",
+                color = MaterialTheme.colorScheme.onTertiary,
+                style = MaterialTheme.typography.labelLarge
+            )
+        }
+    }
 }

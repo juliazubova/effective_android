@@ -53,6 +53,12 @@ val Typography = Typography(
         lineHeight = 19.sp,
         letterSpacing = 0.sp
     ),
+    labelLarge = TextStyle(
+        fontSize = 20.sp,
+        fontFamily = FontFamily(Font(R.font.sk_modernist_bold)),
+        fontWeight = FontWeight(700),
+        letterSpacing = 0.6.sp,
+    ),
     labelMedium = TextStyle(
         fontSize = 10.sp,
         fontFamily = FontFamily(Font(R.font.montserrat)),
