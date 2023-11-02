@@ -1,5 +1,6 @@
 package com.example.effective_android
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.provider.Settings
 import android.provider.Settings.Global.getString
@@ -43,6 +44,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val res: Resources = resources
             Effective_androidTheme {
                 Column(modifier = Modifier
                     .fillMaxSize()
@@ -52,10 +54,11 @@ class MainActivity : ComponentActivity() {
                     HeaderImage()
                     Card(
                         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.padding(start = 24.dp).fillMaxWidth()
                     ) {
                         HeaderWithLogo(getString(R.string.game_name), getString(R.string.number_of_reviews))
-
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TagsAndDescrition(res.getStringArray(R.array.tags), getString(R.string.game_description))
                     }
                 }
 
@@ -82,10 +85,7 @@ fun HeaderWithLogo(game_name: String, number_of_reviews: String){
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "image",
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .width(88.dp)
-                .padding(start = 24.dp)
-        )
+            modifier = Modifier.width(88.dp))
         Spacer(modifier = Modifier.width(12.dp))
         Column {
             Text(
@@ -109,4 +109,40 @@ fun HeaderWithLogo(game_name: String, number_of_reviews: String){
             }
         }
     }
+}
+
+@Composable
+fun TagsAndDescrition(tags: Array<String>, description: String){
+    Row {
+        for (elem in tags)
+            Tag(elem)
+    }
+    Spacer(modifier = Modifier.height(30.dp))
+    Text(
+        text = description,
+        color = MaterialTheme.colorScheme.onPrimary,
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = Modifier.padding(end = 24.dp)
+    )
+}
+
+@Composable
+fun Tag(name: String){
+    Row(
+        modifier = Modifier
+            .height(22.dp)
+            .clip(shape = RoundedCornerShape(200.dp))
+            .background(color = MaterialTheme.colorScheme.primaryContainer),
+        //contentAlignment = Alignment.Center
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(
+            text = name,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+    }
+    Spacer(modifier = Modifier.width(10.dp))
 }

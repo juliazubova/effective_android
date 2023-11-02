@@ -30,4 +30,9 @@ val Typography = Typography(
         lineHeight = 19.sp,
         letterSpacing = 0.sp
     ),
+    labelMedium = TextStyle(
+        fontSize = 10.sp,
+        fontFamily = FontFamily(Font(R.font.montserrat)),
+        fontWeight = FontWeight(500),
+    )
 )
