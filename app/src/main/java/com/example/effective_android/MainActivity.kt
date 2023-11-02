@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
                         HeaderWithLogo(getString(R.string.game_name), getString(R.string.number_of_reviews))
                         Spacer(modifier = Modifier.height(16.dp))
                         TagsAndDescrition(res.getStringArray(R.array.tags), getString(R.string.game_description))
+                        Carousel()
                     }
                 }
 
@@ -122,7 +123,7 @@ fun TagsAndDescrition(tags: Array<String>, description: String){
         text = description,
         color = MaterialTheme.colorScheme.onPrimary,
         style = MaterialTheme.typography.bodyMedium,
-        modifier = Modifier.padding(end = 24.dp)
+        modifier = Modifier.padding(end = 24.dp, bottom = 15.dp)
     )
 }
 
@@ -145,4 +146,28 @@ fun Tag(name: String){
         Spacer(modifier = Modifier.width(10.dp))
     }
     Spacer(modifier = Modifier.width(10.dp))
+}
+@Preview(showBackground = true)
+@Composable
+fun Carousel(){
+    Row(modifier = Modifier
+        .padding(bottom = 20.dp)
+        .horizontalScroll(rememberScrollState())) {
+        ImageInCarousel(R.drawable.example_image1)
+        ImageInCarousel(R.drawable.example_image2)
+    }
+}
+
+@Composable
+fun ImageInCarousel(path: Int){
+    Image(
+        painter = painterResource(id = path),
+        contentDescription = "image",
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier
+            .width(240.dp)
+            .height(135.dp)
+            .padding(end = 13.dp)
+            .clip(RoundedCornerShape(16.dp))
+    )
 }
