@@ -9,6 +9,20 @@ import androidx.compose.ui.unit.sp
 import com.example.effective_android.R
 
 val Typography = Typography(
+
+    headlineLarge = TextStyle(
+        fontSize = 20.sp,
+        lineHeight = 26.sp,
+        fontFamily = FontFamily(Font(R.font.sk_modernist_bold)),
+        fontWeight = FontWeight(700),
+        letterSpacing = 0.5.sp,
+    ),
+    headlineSmall = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.sk_modernist_regular)),
+        fontWeight = FontWeight(400),
+        letterSpacing = 0.5.sp,
+    ),
     bodyMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.sk_modernist_regular)),
         fontWeight = FontWeight(400),

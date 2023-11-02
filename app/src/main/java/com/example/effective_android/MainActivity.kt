@@ -1,6 +1,8 @@
 package com.example.effective_android
 
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.Global.getString
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -52,7 +54,8 @@ class MainActivity : ComponentActivity() {
                         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        LogoImage()
+                        HeaderWithLogo(getString(R.string.game_name), getString(R.string.number_of_reviews))
+
                     }
                 }
 
@@ -61,8 +64,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-@Preview(showBackground = true)
 @Composable
 fun HeaderImage(){
     Image(
@@ -73,13 +74,39 @@ fun HeaderImage(){
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun LogoImage(){
-    Image (
-        painter = painterResource(id = R.drawable.logo),
-        contentDescription = "image",
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.padding(start = 24.dp)
-    )
+fun HeaderWithLogo(game_name: String, number_of_reviews: String){
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image (
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .width(88.dp)
+                .padding(start = 24.dp)
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Column {
+            Text(
+                text = game_name,
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.headlineLarge,
+                modifier = Modifier.padding(end = 6.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Row {
+                Image(
+                    painter = painterResource(id = R.drawable.stars),
+                    contentDescription = "image"
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = number_of_reviews,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            }
+        }
+    }
 }
