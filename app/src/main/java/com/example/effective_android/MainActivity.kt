@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
                         Divider(
                             color = MaterialTheme.colorScheme.onSecondary,
                             thickness = 1.dp,
-                            modifier = Modifier.padding(bottom = 24.dp)
+                            modifier = Modifier.padding(bottom = 24.dp, start = 14.dp, end = 38.dp)
                         )
                         Comment(R.drawable.person2, getString(R.string.commentator2), getString(R.string.date2), getString(R.string.comment2))
                         InstallButton()
