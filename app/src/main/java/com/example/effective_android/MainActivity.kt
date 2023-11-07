@@ -43,30 +43,56 @@ class MainActivity : ComponentActivity() {
         setContent {
             val res: Resources = resources
             Effective_androidTheme {
-                Column(modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = MaterialTheme.colorScheme.primary)
-                    .verticalScroll(rememberScrollState())
-                ){
-                    HeaderImage()
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = MaterialTheme.colorScheme.primary)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    HeaderImage(getString(R.string.img_desc_header))
                     Card(
                         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
                         modifier = Modifier
                             .padding(start = 24.dp)
                             .fillMaxWidth()
                     ) {
-                        HeaderWithLogo(getString(R.string.game_name), getString(R.string.number_of_reviews))
-                        TagsAndDescrition(res.getStringArray(R.array.tags), getString(R.string.game_description))
+                        HeaderWithLogo(
+                            getString(R.string.img_desc_logo),
+                            getString(R.string.gameName),
+                            getString(R.string.img_desc_rating),
+                            getString(R.string.shortNumberOfReviews)
+                        )
+                        TagsAndDescrition(
+                            res.getStringArray(R.array.tags),
+                            getString(R.string.game_description)
+                        )
                         Carousel()
-                        RatingAndReviews(getString(R.string.game_rating), getString(R.string.number_of_reviews))
-                        Comment(R.drawable.person1, getString(R.string.commentator1), getString(R.string.date1), getString(R.string.comment1))
+                        RatingAndReviews(
+                            getString(R.string.reviewHeader),
+                            getString(R.string.gameRating),
+                            getString(R.string.img_desc_rating),
+                            getString(R.string.longNumberOfReviews)
+                        )
+                        Comment(
+                            R.drawable.person1,
+                            getString(R.string.img_desc_commentator1),
+                            getString(R.string.commentator1),
+                            getString(R.string.date1),
+                            getString(R.string.comment1)
+                        )
                         Divider(
                             color = MaterialTheme.colorScheme.onSecondary,
                             thickness = 1.dp,
                             modifier = Modifier.padding(bottom = 24.dp, start = 14.dp, end = 38.dp)
                         )
-                        Comment(R.drawable.person2, getString(R.string.commentator2), getString(R.string.date2), getString(R.string.comment2))
-                        InstallButton()
+                        Comment(
+                            R.drawable.person2,
+                            getString(R.string.img_desc_commentator2),
+                            getString(R.string.commentator2),
+                            getString(R.string.date2),
+                            getString(R.string.comment2)
+                        )
+                        InstallButton(getString(R.string.buttonInstall))
                     }
                 }
 
@@ -76,10 +102,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HeaderImage(){
+fun HeaderImage(imgDesc: String) {
     Image(
         painter = painterResource(id = R.drawable.header),
-        contentDescription = "image",
+        contentDescription = imgDesc,
         contentScale = ContentScale.FillWidth,
         modifier = Modifier
             .padding(bottom = 16.dp)
@@ -89,17 +115,23 @@ fun HeaderImage(){
 
 //@Preview(showBackground = true)
 @Composable
-fun HeaderWithLogo(game_name: String, number_of_reviews: String){
+fun HeaderWithLogo(
+    imgDescLogo: String,
+    gameName: String,
+    imgDescRating: String,
+    numberOfReviews: String
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Image (
+        Image(
             painter = painterResource(id = R.drawable.logo),
-            contentDescription = "image",
+            contentDescription = imgDescLogo,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.width(88.dp))
+            modifier = Modifier.width(88.dp)
+        )
         Spacer(modifier = Modifier.width(12.dp))
         Column {
             Text(
-                text = game_name,
+                text = gameName,
                 color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(end = 6.dp)
@@ -108,11 +140,11 @@ fun HeaderWithLogo(game_name: String, number_of_reviews: String){
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.stars),
-                    contentDescription = "image"
+                    contentDescription = imgDescRating
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = number_of_reviews,
+                    text = numberOfReviews,
                     color = MaterialTheme.colorScheme.onSecondary,
                     style = MaterialTheme.typography.headlineSmall
                 )
@@ -122,7 +154,7 @@ fun HeaderWithLogo(game_name: String, number_of_reviews: String){
 }
 
 @Composable
-fun TagsAndDescrition(tags: Array<String>, description: String){
+fun TagsAndDescrition(tags: Array<String>, description: String) {
     Row {
         for (elem in tags)
             Tag(elem)
@@ -137,7 +169,7 @@ fun TagsAndDescrition(tags: Array<String>, description: String){
 }
 
 @Composable
-fun Tag(name: String){
+fun Tag(name: String) {
     Row(
         modifier = Modifier
             .height(22.dp)
@@ -145,7 +177,7 @@ fun Tag(name: String){
             .background(color = MaterialTheme.colorScheme.primaryContainer),
         //contentAlignment = Alignment.Center
         verticalAlignment = Alignment.CenterVertically
-    ){
+    ) {
         Spacer(modifier = Modifier.width(10.dp))
         Text(
             text = name,
@@ -156,19 +188,22 @@ fun Tag(name: String){
     }
     Spacer(modifier = Modifier.width(10.dp))
 }
+
 @Preview(showBackground = true)
 @Composable
-fun Carousel(){
-    Row(modifier = Modifier
-        .padding(bottom = 20.dp)
-        .horizontalScroll(rememberScrollState())) {
+fun Carousel() {
+    Row(
+        modifier = Modifier
+            .padding(bottom = 20.dp)
+            .horizontalScroll(rememberScrollState())
+    ) {
         ImageInCarousel(R.drawable.example_image1)
         ImageInCarousel(R.drawable.example_image2)
     }
 }
 
 @Composable
-fun ImageInCarousel(path: Int){
+fun ImageInCarousel(path: Int) {
     Image(
         painter = painterResource(id = path),
         contentDescription = "image",
@@ -182,30 +217,30 @@ fun ImageInCarousel(path: Int){
 }
 
 @Composable
-fun RatingAndReviews(game_rating: String, number_of_reviews: String){
+fun RatingAndReviews(header: String, gameRating: String, imgDesc: String, numberOfReviews: String) {
     Text(
-        text = "Reviews & Ratings",
+        text = header,
         color = MaterialTheme.colorScheme.onPrimary,
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(end = 12.dp)
     )
-    Row (
+    Row(
         verticalAlignment = Alignment.Bottom,
         modifier = Modifier.padding(bottom = 30.dp)
-    ){
+    ) {
         Text(
-            text = game_rating,
+            text = gameRating,
             color = MaterialTheme.colorScheme.secondary,
             style = MaterialTheme.typography.titleLarge
         )
-        Column (modifier = Modifier.padding(start = 17.dp)){
+        Column(modifier = Modifier.padding(start = 17.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.stars),
-                contentDescription = "image",
+                contentDescription = imgDesc,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             Text(
-                text = number_of_reviews + " Reviews",
+                text = numberOfReviews,
                 color = MaterialTheme.colorScheme.onSecondary,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 7.dp)
@@ -215,18 +250,18 @@ fun RatingAndReviews(game_rating: String, number_of_reviews: String){
 }
 
 @Composable
-fun Comment(image: Int, user_name: String, date: String, comment: String) {
-    Row() {
+fun Comment(image: Int, imgDesc: String, username: String, date: String, comment: String) {
+    Row {
         Image(
             painter = painterResource(id = image),
-            contentDescription = "person1",
+            contentDescription = imgDesc,
             modifier = Modifier
                 .size(36.dp)
                 .padding(end = 16.dp)
         )
         Column {
             Text(
-                text = user_name,
+                text = username,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.padding(bottom = 7.dp)
@@ -247,9 +282,9 @@ fun Comment(image: Int, user_name: String, date: String, comment: String) {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun InstallButton() {
+fun InstallButton(text: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -265,7 +300,7 @@ fun InstallButton() {
             shape = RoundedCornerShape(size = 12.dp)
         ) {
             Text(
-                text = "Install",
+                text = text,
                 color = MaterialTheme.colorScheme.onTertiary,
                 style = MaterialTheme.typography.labelLarge
             )
