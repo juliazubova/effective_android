@@ -29,6 +29,8 @@
     <string name='img_desc_header'>header image</string>
     <string name='img_desc_logo'>logo</string>
     <string name='img_desc_rating'>rating</string>
+    <string name='img_desc_example1'>example1</string>
+    <string name='img_desc_example2'>example2</string>
     <string name='img_desc_commentator1'>commentator1</string>
     <string name='img_desc_commentator2'>commentator2</string>
 
