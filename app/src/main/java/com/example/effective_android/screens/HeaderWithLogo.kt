@@ -42,7 +42,8 @@ fun HeaderWithLogo() {
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.stars),
-                    contentDescription = stringResource(R.string.img_desc_rating)
+                    contentDescription = stringResource(R.string.img_desc_rating),
+                    modifier = Modifier.width(76.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(

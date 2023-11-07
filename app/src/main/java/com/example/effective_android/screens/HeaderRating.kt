@@ -2,6 +2,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +36,7 @@ fun HeaderRating() {
             Image(
                 painter = painterResource(id = R.drawable.stars),
                 contentDescription = stringResource(id = R.string.img_desc_rating),
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.width(76.dp).padding(bottom = 8.dp)
             )
             Text(
                 text = stringResource(id = R.string.longNumberOfReviews),
